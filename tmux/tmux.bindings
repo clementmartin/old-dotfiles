@@ -1,0 +1,46 @@
+# Set the prefix to ^A.
+unbind C-b
+set -g prefix ^A
+
+# Alors ctrl-a outside zith ctrl-a a
+unbind a
+bind a send-prefix
+
+# reload config
+bind r source-file ~/.tmux.conf
+unbind x
+bind x lock-server
+
+unbind *
+bind * list-clients
+unbind w
+bind w choose-window
+
+# windows management
+unbind ^A
+bind ^A last-window
+
+unbind A
+bind A command-prompt "rename-window %%"
+unbind N
+bind N command-prompt "new-session -s %% bash"
+unbind N
+bind N command-prompt "new-session -s %% bash"
+
+unbind k
+bind k confirm-before "kill-window"
+
+unbind ?
+bind ? split-window 'man tmux'
+
+unbind l
+bind l refresh-client
+
+# switch panes using Alt-arrow without prefix
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# go to copy mode with alt=pgUp
+bind -n M-PgUp copy-mode -u
