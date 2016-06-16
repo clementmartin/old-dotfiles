@@ -13,7 +13,8 @@ overwrite_config() {
   for dir in *; do
     if [[ -d "${dir}" ]]; then
       for item in "${dir}"/*; do
-        cp -vr "${item}" "${HOME}/.${item##*/}"
+        rm -rf "${HOME}/.${item#${dir}/}"
+        cp -vr "${item}" "${HOME}/.${item#${dir}/}"
       done
     fi
   done
