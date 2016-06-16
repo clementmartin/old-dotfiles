@@ -1,0 +1,13 @@
+[user]
+	name = Clement Martin
+	email = clement.martin@devoteam.com
+[core]
+	editor = vim
+	autocrlf = input
+	whitespace = blank-at-eol,blank-at-eof,space-before-tab
+[help]
+	autocorrect = 5
+[color]
+	ui = auto
+[merge]
+	tool = vimdiff
