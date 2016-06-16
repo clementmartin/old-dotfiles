@@ -1,4 +1,4 @@
 augroup filetypedetect
-	au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
+	au BufNewFile,BufRead .tmux.*,tmux.*, setf tmux
 augroup END
 
