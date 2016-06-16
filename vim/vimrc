@@ -1,4 +1,8 @@
-colorscheme desert
+colorscheme jellybeans
 set nocompatible
 set background=dark
 syntax on
+
+if has('unix')
+    set t_Co=256
+endif
