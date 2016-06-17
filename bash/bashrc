@@ -5,8 +5,40 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-# Uncomment the following line if you don't like systemctl's auto-paging feature:
-# export SYSTEMD_PAGER=
-
 # User specific aliases and functions
-export PATH=~/bin:$PATH
+# test if a file exists before sourcing it, warn the user otherwise
+include_file() {
+  local included_file=$1
+  if [ -f "${included_file}" ]; then
+    . "${included_file}"
+  else
+    echo "No sourcing of ${included_file}, it doesn't exists."
+  fi
+}
+
+pathremove () {
+        local IFS=':'
+        local NEWPATH
+        local DIR
+        local PATHVARIABLE=${2:-PATH}
+        for DIR in ${!PATHVARIABLE} ; do
+                if [ "$DIR" != "$1" ] ; then
+                  NEWPATH=${NEWPATH:+$NEWPATH:}$DIR
+                fi
+        done
+        export $PATHVARIABLE="$NEWPATH"
+}
+
+pathprepend () {
+        pathremove $1 $2
+        local PATHVARIABLE=${2:-PATH}
+        export $PATHVARIABLE="$1${!PATHVARIABLE:+:${!PATHVARIABLE}}"
+}
+
+pathappend () {
+        pathremove $1 $2
+        local PATHVARIABLE=${2:-PATH}
+        export $PATHVARIABLE="${!PATHVARIABLE:+${!PATHVARIABLE}:}$1"
+}
+
+export -f pathremove pathprepend pathappend include_file

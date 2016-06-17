@@ -5,8 +5,12 @@ if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
 fi
 
-# User specific environment and startup programs
+# include prompt configuration
+include_file ~/.bash_prompt
 
-PATH=$PATH:$HOME/.local/bin:$HOME/bin
+# User specific environment and startup programs
+if [ -d "$HOME/bin" ] ; then
+  pathprepend $HOME/bin
+fi
 
 export PATH
