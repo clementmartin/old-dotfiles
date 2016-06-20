@@ -1,5 +1,7 @@
 #!/bin/bash
 
+vim_cache_dir=~/.vim_cache
+
 warn_and_exit() {
   echo
   echo "!!!!!!!!!!!!!WARNING WARNING WARNING!!!!!!!!!!!!!!!"
@@ -22,5 +24,9 @@ overwrite_config() {
 }
 
 [[ $1 = "-YES-RESET-MY-CONF" ]] || warn_and_exit
+
+# create vim cache dir if it doesn't exists.
+
+[[ -d "${vim_cache_dir}" ]] || mkdir "${vim_cache_dir}"
 
 overwrite_config
