@@ -14,6 +14,9 @@ set nocompatible
 " allow per file settings if a modeline is found
 set modeline
 
+" display tabs and trailing spaces
+set list listchars=tab:»·,trail:·
+
 " improve tab bar
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
