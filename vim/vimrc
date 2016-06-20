@@ -1,9 +1,25 @@
-colorscheme jellybeans
-set nocompatible
-set background=dark
+" Nice colors
 syntax on
+set background=dark
+colorscheme jellybeans
+" same for the satusline
+let g:airline_theme='jellybeans'
+
+" always show statusline
+set laststatus=2
+
+" don't behave like the old vim, we need it for most plugins
+set nocompatible
+
+" allow per file settings if a modeline is found
 set modeline
 
+" improve tab bar
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" use 256 colours
 if has('unix')
     set t_Co=256
 endif
@@ -18,4 +34,3 @@ map <C-n> :NERDTreeToggle<CR>
 " Use ASCII characters for delimiters
 let g:NERDTreeDirArrowExpandable = '>'
 let g:NERDTreeDirArrowCollapsible = '|'
-
