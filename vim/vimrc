@@ -35,8 +35,11 @@ if has('unix')
 endif
 
 " unite.vim mappings
-nnoremap <Leader>f :Unite file<CR>
-nnoremap <Leader>b :Unite buffer<CR>
-nnoremap <Leader>t :Unite tab<CR>
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <leader>t :<C-u>Unite -buffer-name=tab    -start-insert tab<cr>
+nnoremap <leader>r :<C-u>Unite -buffer-name=files  -start-insert file_rec<cr>
+nnoremap <leader>f :<C-u>Unite -buffer-name=files  -start-insert file<cr>
+nnoremap <leader>b :<C-u>Unite -buffer-name=buffer -start-insert buffer<cr>
+nnoremap <leader>h :<C-u>Unite -buffer-name=help   -start-insert help<cr>
 " file explorer mode
 nnoremap <Leader>e :Explore<CR>
