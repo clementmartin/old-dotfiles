@@ -34,3 +34,9 @@ if has('unix')
     set t_Co=256
 endif
 
+" unite.vim mappings
+nnoremap <Leader>f :Unite file<CR>
+nnoremap <Leader>b :Unite buffer<CR>
+nnoremap <Leader>t :Unite tab<CR>
+" file explorer mode
+nnoremap <Leader>e :Explore<CR>
