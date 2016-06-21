@@ -23,9 +23,7 @@ bind ^A last-window
 unbind A
 bind A command-prompt "rename-window %%"
 unbind N
-bind N command-prompt "new-session -s %% bash"
-unbind N
-bind N command-prompt "new-session -s %% bash"
+bind N command-prompt "new-session -s %% 'bash -l'"
 
 unbind k
 bind k confirm-before "kill-window"
