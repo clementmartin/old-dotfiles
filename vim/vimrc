@@ -34,13 +34,3 @@ if has('unix')
     set t_Co=256
 endif
 
-" open NERDTree if we start vim without specifying any file to edit
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" map ctrl-n to toggle NERDTree
-map <C-n> :NERDTreeToggle<CR>
-
-" Use ASCII characters for delimiters
-let g:NERDTreeDirArrowExpandable = '>'
-let g:NERDTreeDirArrowCollapsible = '|'
