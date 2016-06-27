@@ -13,7 +13,44 @@ Plugin 'gmarik/vundle'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
+" View and easily strip whitespaces
+Plugin 'ntpeters/vim-better-whitespace'
 
+" Unix helpers
+Plugin 'tpope/vim-eunuch'
+
+" Git integration
+Plugin 'tpope/vim-fugitive'
+
+" Easy session support
+Plugin 'tpope/vim-obsession'
+
+" quoting made easy
+Plugin 'tpope/vim-surround'
+
+" this thing.
+Plugin 'Shougo/unite.vim'
+
+" jellybeans colorscheme
+Plugin 'nanotech/jellybeans.vim'
+
+" Salt files syntax
+Plugin 'saltstacl/salt-vim'
+
+" Faster yaml hilighting
+Plugin 'stephpy/vim-yaml'
+
+" Up to date jinja syntax
+Plugin 'Glench/Vim-Jinja2-Syntax'
+
+" Tmux config
+Plugin 'tmux-plugins/vim-tmux'
+
+" Correct comments
+Plugin 'tpope/vim-commentary'
+
+" tmux status generator
+Plugin 'edkolev/tmuxline.vim'
 
 
 " Now we can turn our filetype functionality back on
