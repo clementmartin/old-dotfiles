@@ -1,3 +1,24 @@
+" Vundle setup
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" This is the Vundle package, which can be found on GitHub.
+" For GitHub repos, you specify plugins using the
+" 'user/repository' format
+Plugin 'gmarik/vundle'
+
+" Nice status bar and themes
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+
+
+
+" Now we can turn our filetype functionality back on
+filetype plugin indent on
+
 " Nice colors
 syntax on
 set background=dark
@@ -7,9 +28,6 @@ let g:airline_theme='jellybeans'
 
 " always show statusline
 set laststatus=2
-
-" don't behave like the old vim, we need it for most plugins
-set nocompatible
 
 " allow per file settings if a modeline is found
 set modeline
@@ -26,8 +44,7 @@ set udir=~/.vim_cache//
 
 " improve tab bar
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_powerline_fonts = 1
 
 " use 256 colours
 if has('unix')
