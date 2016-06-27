@@ -12,32 +12,7 @@ include_file() {
   if [ -f "${included_file}" ]; then
     . "${included_file}"
   else
-    echo "No sourcing of ${included_file}, it doesn't exists."
+    echo "Not sourcing ${included_file}, it doesn't exists."
   fi
 }
 
-pathremove () {
-  local IFS=':'
-  local NEWPATH
-  local DIR
-  local PATHVARIABLE=${2:-PATH}
-  for DIR in ${!PATHVARIABLE} ; do
-    if [ "$DIR" != "$1" ] ; then
-      NEWPATH=${NEWPATH:+$NEWPATH:}$DIR
-    fi
-  done
-  export $PATHVARIABLE="$NEWPATH"
-}
-repend () {
-  pathremove $1 $2
-  local PATHVARIABLE=${2:-PATH}
-  export $PATHVARIABLE="$1${!PATHVARIABLE:+:${!PATHVARIABLE}}"
-}
-
-pathappend () {
-  pathremove $1 $2
-  local PATHVARIABLE=${2:-PATH}
-  export $PATHVARIABLE="${!PATHVARIABLE:+${!PATHVARIABLE}:}$1"
-}
-
-export -f pathremove pathprepend pathappend include_file

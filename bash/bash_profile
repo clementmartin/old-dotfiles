@@ -10,7 +10,7 @@ include_file ~/.bash_prompt
 
 # User specific environment and startup programs
 if [ -d "$HOME/bin" ] ; then
-  pathprepend $HOME/bin
+  PATH=$HOME/bin:$PATH
 fi
 
 export PATH
