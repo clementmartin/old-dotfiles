@@ -12,55 +12,42 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 
+" use gmake if we're on a real UNIX
 let g:make = 'gmake'
 if system('uname -o') =~ '^GNU/'
         let g:make = 'make'
 endif
+" Async procs
 NeoBundle 'Shougo/vimproc.vim', {'build': {'unix': g:make}}
-
 " Nice status bar and themes
 NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'vim-airline/vim-airline-themes'
-
 " View and easily strip whitespaces
 NeoBundle 'ntpeters/vim-better-whitespace'
-
 " Unix helpers
 NeoBundle 'tpope/vim-eunuch'
-
 " Git integration
 NeoBundle 'tpope/vim-fugitive'
-
 " Easy session support
 NeoBundle 'tpope/vim-obsession'
-
 " quoting made easy
 NeoBundle 'tpope/vim-surround'
-
 " this thing.
 NeoBundle 'Shougo/unite.vim'
-
 " jellybeans colorscheme
 NeoBundle 'nanotech/jellybeans.vim'
-
 " Salt files syntax
 NeoBundle 'saltstack/salt-vim'
-
 " Faster yaml hilighting
 NeoBundle 'stephpy/vim-yaml'
-
 " Up to date jinja syntax
 NeoBundle 'Glench/Vim-Jinja2-Syntax'
-
 " Tmux config
 NeoBundle 'tmux-plugins/vim-tmux'
-
 " Correct comments
 NeoBundle 'tpope/vim-commentary'
-
 " tmux status generator
 NeoBundle 'edkolev/tmuxline.vim'
-
 " Dispatch build into another window
 NeoBundle 'tpope/vim-dispatch'
 
@@ -70,13 +57,22 @@ call neobundle#end()
 " Now we can turn our filetype functionality back on
 filetype plugin indent on
 
-" Nice colors
+" Syntax highlighting
 syntax on
+
+" use 256 colours
+if has('unix')
+    set t_Co=256
+endif
+
+" Nice colours
 set background=dark
 colorscheme jellybeans
 " same for the satusline
 let g:airline_theme='jellybeans'
-
+" improve tab bar
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 " always show statusline
 set laststatus=2
 
@@ -93,15 +89,6 @@ set directory=~/.vim_cache//
 set udf
 set udir=~/.vim_cache//
 
-" improve tab bar
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-
-" use 256 colours
-if has('unix')
-    set t_Co=256
-endif
-
 " unite.vim mappings
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 nnoremap <leader>t :<C-u>Unite -buffer-name=tab    -start-insert tab<cr>
@@ -111,6 +98,3 @@ nnoremap <leader>b :<C-u>Unite -buffer-name=buffer -start-insert buffer<cr>
 nnoremap <leader>h :<C-u>Unite -buffer-name=help   -start-insert help<cr>
 " file explorer mode
 nnoremap <Leader>e :Explore<CR>
-
-" check for uninstalled plugins
-NeoBundleCheck
