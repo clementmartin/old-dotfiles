@@ -42,3 +42,5 @@ bind -n M-Down select-pane -D
 
 # go to copy mode with alt=pgUp
 bind -n M-PgUp copy-mode -u
+
+# vim: ft=tmux:
