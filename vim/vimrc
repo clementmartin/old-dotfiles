@@ -1,57 +1,71 @@
 " Vundle setup
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
 
-" This is the Vundle package, which can be found on GitHub.
-" For GitHub repos, you specify plugins using the
-" 'user/repository' format
-Plugin 'gmarik/vundle'
+" Required:
+set runtimepath^=~/.vim/bundle/neobundle.vim/
+
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+let g:make = 'gmake'
+if system('uname -o') =~ '^GNU/'
+        let g:make = 'make'
+endif
+NeoBundle 'Shougo/vimproc.vim', {'build': {'unix': g:make}}
 
 " Nice status bar and themes
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+NeoBundle 'vim-airline/vim-airline'
+NeoBundle 'vim-airline/vim-airline-themes'
 
 " View and easily strip whitespaces
-Plugin 'ntpeters/vim-better-whitespace'
+NeoBundle 'ntpeters/vim-better-whitespace'
 
 " Unix helpers
-Plugin 'tpope/vim-eunuch'
+NeoBundle 'tpope/vim-eunuch'
 
 " Git integration
-Plugin 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-fugitive'
 
 " Easy session support
-Plugin 'tpope/vim-obsession'
+NeoBundle 'tpope/vim-obsession'
 
 " quoting made easy
-Plugin 'tpope/vim-surround'
+NeoBundle 'tpope/vim-surround'
 
 " this thing.
-Plugin 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite.vim'
 
 " jellybeans colorscheme
-Plugin 'nanotech/jellybeans.vim'
+NeoBundle 'nanotech/jellybeans.vim'
 
 " Salt files syntax
-Plugin 'saltstacl/salt-vim'
+NeoBundle 'saltstack/salt-vim'
 
 " Faster yaml hilighting
-Plugin 'stephpy/vim-yaml'
+NeoBundle 'stephpy/vim-yaml'
 
 " Up to date jinja syntax
-Plugin 'Glench/Vim-Jinja2-Syntax'
+NeoBundle 'Glench/Vim-Jinja2-Syntax'
 
 " Tmux config
-Plugin 'tmux-plugins/vim-tmux'
+NeoBundle 'tmux-plugins/vim-tmux'
 
 " Correct comments
-Plugin 'tpope/vim-commentary'
+NeoBundle 'tpope/vim-commentary'
 
 " tmux status generator
-Plugin 'edkolev/tmuxline.vim'
+NeoBundle 'edkolev/tmuxline.vim'
 
+" Dispatch build into another window
+NeoBundle 'tpope/vim-dispatch'
+
+" All of Plugins must be added before the following line
+call neobundle#end()
 
 " Now we can turn our filetype functionality back on
 filetype plugin indent on
@@ -91,9 +105,12 @@ endif
 " unite.vim mappings
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 nnoremap <leader>t :<C-u>Unite -buffer-name=tab    -start-insert tab<cr>
-nnoremap <leader>r :<C-u>Unite -buffer-name=files  -start-insert file_rec<cr>
+nnoremap <leader>r :<C-u>Unite -buffer-name=files  -start-insert file_rec/async<cr>
 nnoremap <leader>f :<C-u>Unite -buffer-name=files  -start-insert file<cr>
 nnoremap <leader>b :<C-u>Unite -buffer-name=buffer -start-insert buffer<cr>
 nnoremap <leader>h :<C-u>Unite -buffer-name=help   -start-insert help<cr>
 " file explorer mode
 nnoremap <Leader>e :Explore<CR>
+
+" check for uninstalled plugins
+NeoBundleCheck
