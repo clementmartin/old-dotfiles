@@ -1,0 +1,98 @@
+source "gpg -dq ~/.mutt/passwords.gpg |"
+source ~/.mutt/jellybeans.theme
+
+set imap_passive          = no
+set imap_keepalive        = 300
+set mail_check            = 60
+set imap_check_subscribed = yes
+set imap_idle             = yes
+set imap_user             = "twisla"
+set imap_pass             = "bimbimblah"
+set folder                = imaps://philippe.twis.la/
+set realname              = "Clement Martin"
+set from                  = "twisla@twis.la"
+set spoolfile             = +INBOX
+set header_cache          = ~/.mutt/hcache
+set message_cachedir      = ~/.mutt/cache-twis.la
+set postponed             = +Drafts
+set record                = +Sent
+set hostname              = 'lambert.twis.la'
+set smtp_url              ="smtp://twisla@wis.la:587/"
+set smtp_pass             = $my_twisla_smtp_pass
+set editor                = vim
+set edit_headers          = yes
+set autoedit              = yes
+set include               = yes
+set copy                  = yes
+set delete                = yes
+set mark_old              = no
+set use_from              = yes
+set charset               = "utf-8"
+set mailcap_path          = ~/.mutt/mailcap
+set pager_stop            = yes
+set metoo                 = yes
+set arrow_cursor          = yes
+set markers               = no
+set menu_scroll           = yes
+set history               = 50
+set pager_index_lines     = 15
+set pager_context         = 5
+set sort                  = threads
+set sort_aux              = last-date-received
+set date_format           = "%y-%m-%d %T"
+set index_format          = "%2C | %Z [%d] %-30.30F (%-4.4c) %s"
+set query_command         = "abook --mutt-query '%s'"
+
+hdr_order                   Date:\
+                            To:\
+                            CC:\
+                            From:\
+                            Reply-To:\
+                            Subject:\
+                            Organization:\
+                            User-Agent:\
+                            X-Mailer:
+
+auto_view                   text/html
+alternative_order           text/plain text/html
+
+bind editor                 <Tab> complete-query
+
+macro index,pager           a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
+macro attach                V "<pipe-entry>cat >~/.cache/mutt/mail.html && dwb ~/.cache/mutt/mail.html && rm ~/.cache/mutt/mail.html<enter>"
+
+folder-hook   Sent '\
+  set index_format="%2C | %Z [%d] %-30.30t (%-4.4c) %s"'
+
+folder-hook ! Sent '\
+  set index_format="%2C | %Z [%d] %-30.30F (%-4.4c) %s"'
+
+folder-hook   dvtm "\
+  set signature = ~/.mutt/dvtm.sig \
+      smtp_url  = smtp://clement.martin@devoteam.com@smtp.gmail.com:587 \
+      smtp_pass = $my_gmail_smtp_pass \
+      hostname  = lambert.be.devoteam.com \
+      from      = 'Clément Martin <clement.martin@devoteam.com>'"
+
+folder-hook   INBOX "\
+  set signature = ~/.mutt/twisla.sig \
+      smtp_url  = smtp://twisla@twis.la:587 \
+      smtp_pass = $my_twisla_smtp_pass \
+      hostname  = lambert.twis.la \
+      from      = 'Clément Martin <twisla@twis.la>'"
+
+folder-hook   gcu "\
+  set signature = ~/.mutt/gcu.sig \
+      smtp_url  = smtp://twisla@twis.la:587 \
+      smtp_pass = $my_twisla_smtp_pass \
+      hostname  = lambert.twis.la \
+      from      = '<twisla@gcu-squad.org>'"
+
+folder-hook   ml/sysadmin "\
+  set signature = ~/.mutt/gcu.sig \
+      smtp_url  = smtp://twisla@twis.la:587 \
+      smtp_pass = $my_twisla_smtp_pass \
+      hostname  = lambert.twis.la \
+      from      = '<twisla@gcu-squad.org>'"
+
+
