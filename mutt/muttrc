@@ -1,6 +1,15 @@
 source "gpg -dq ~/.mutt/passwords.gpg |"
 source ~/.mutt/jellybeans.theme
+source ~/.mutt/gpg.rc
 
+set pgp_autosign          = yes
+set pgp_replyencrypt      = yes
+set pgp_replysign         = yes
+set pgp_verify_sig        = yes
+set pgp_sign_as           = D1DFF6E2
+set pgp_timeout           = 3600
+set crypt_autosign        = yes
+set crypt_replyencrypt    = yes
 set imap_passive          = no
 set imap_keepalive        = 300
 set mail_check            = 60
@@ -67,16 +76,18 @@ folder-hook ! Sent '\
   set index_format="%2C | %Z [%d] %-30.30F (%-4.4c) %s"'
 
 folder-hook   dvtm "\
-  set signature = ~/.mutt/dvtm.sig \
-      smtp_url  = smtp://clement.martin@devoteam.com@smtp.gmail.com:587 \
-      smtp_pass = $my_gmail_smtp_pass \
-      hostname  = lambert.be.devoteam.com \
-      from      = 'Clément Martin <clement.martin@devoteam.com>'"
+  set signature   = ~/.mutt/dvtm.sig \
+      smtp_url    = smtp://clement.martin@devoteam.com@smtp.gmail.com:587 \
+      smtp_pass   = $my_gmail_smtp_pass \
+      hostname    = lambert.be.devoteam.com \
+      pgp_sign_as = 29CA88BC \
+      from        = 'Clément Martin <clement.martin@devoteam.com>'"
 
 folder-hook   INBOX "\
   set signature = ~/.mutt/twisla.sig \
       smtp_url  = smtp://twisla@twis.la:587 \
       smtp_pass = $my_twisla_smtp_pass \
+      pgp_sign_as = D1DFF6E2 \
       hostname  = lambert.twis.la \
       from      = 'Clément Martin <twisla@twis.la>'"
 
@@ -84,12 +95,14 @@ folder-hook   gcu "\
   set signature = ~/.mutt/gcu.sig \
       smtp_url  = smtp://twisla@twis.la:587 \
       smtp_pass = $my_twisla_smtp_pass \
+      pgp_sign_as = D1DFF6E2 \
       hostname  = lambert.twis.la \
       from      = '<twisla@gcu-squad.org>'"
 
 folder-hook   ml/sysadmin "\
   set signature = ~/.mutt/gcu.sig \
       smtp_url  = smtp://twisla@twis.la:587 \
+      pgp_sign_as = D1DFF6E2 \
       smtp_pass = $my_twisla_smtp_pass \
       hostname  = lambert.twis.la \
       from      = '<twisla@gcu-squad.org>'"
