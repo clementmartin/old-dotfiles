@@ -11,3 +11,5 @@
 	ui = auto
 [merge]
 	tool = vimdiff
+[push]
+	default = simple
