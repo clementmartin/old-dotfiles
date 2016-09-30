@@ -1,6 +1,6 @@
 PREFIX=${HOME}
 VIM_PLUGIN_MANAGER_URL="https://github.com/Shougo/neobundle.vim"
-VIM_PLUGIN_INSTALL_PATH="~/.vim/bundle/neobundle.vim"
+VIM_PLUGIN_MANAGER_INSTALL_PATH="~/.vim/bundle/neobundle.vim"
 
 function usage {
   echo "$(basename $0) all"
@@ -57,14 +57,19 @@ function install_tmux {
 }
 
 function install_vim {
-  echo "Installing vim configuration..."
-  install -C -D -d -m 0700 .vim/bundle
-  install -C -m 0600 vim/vimrc ${PREFIX}/.vimrc
-  echo "Done."
-  if [ ! -d ${VIM_PLUGIN_MANAGER_INSTALL_PATH} ]; then
-    echo "Cloning vim plugin manager" 
-    git clone ${VIM_PLUGIN_MANAGER_URL} $(VIM_PLUGIN_MANAGER_INSTALL_PATH)
+  if [[ $(which git > /dev/null) ]]; then
+    echo "Installing vim configuration..."
+    install -C -m 0700 -d .vim/bundle
+    install -C -m 0700 -d .vim_cache
+    install -C -m 0600 vim/vimrc ${PREFIX}/.vimrc
     echo "Done."
+    if [ ! -d ${VIM_PLUGIN_MANAGER_INSTALL_PATH} ]; then
+      echo "Cloning vim plugin manager"
+      git clone ${VIM_PLUGIN_MANAGER_URL} $(VIM_PLUGIN_MANAGER_INSTALL_PATH)
+      echo "Done."
+    fi
+  else
+    echo "Please install git to clone vim plugins."
   fi
 }
 
