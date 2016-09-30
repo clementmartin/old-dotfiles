@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 PREFIX=${HOME}
 VIM_PLUGIN_MANAGER_URL="https://github.com/Shougo/neobundle.vim"
 VIM_PLUGIN_MANAGER_INSTALL_PATH="~/.vim/bundle/neobundle.vim"
