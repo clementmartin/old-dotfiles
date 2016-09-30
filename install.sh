@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
-OS=$(uname)
-PREFIX=${HOME}
+OS="$(uname)"
+PREFIX="${HOME}"
 VIM_PLUGIN_MANAGER_URL="https://github.com/Shougo/neobundle.vim"
-VIM_PLUGIN_MANAGER_INSTALL_PATH="~/.vim/bundle/neobundle.vim"
+VIM_PLUGIN_MANAGER_INSTALL_PATH="${PREFIX}/.vim/bundle/neobundle.vim"
+if [[ "${OS}" = "Linux" ]]; then
+  MAKE="make"
+else
+  MAKE="gmake"
+fi
 
 function usage {
   echo "$(basename $0) all"
@@ -66,19 +71,21 @@ function install_tmux {
 }
 
 function install_vim {
-  if [[ $(which git > /dev/null) ]]; then
+  if ! which git > /dev/null; then
+    echo "Please install git to clone vim plugins."
+  elif ! which "${MAKE}" > /dev/null; then
+    echo "Please install ${MAKE} to build vimproc plugin."
+  else
     echo "Installing vim configuration..."
-    install -C -m 0700 -d .vim/bundle
-    install -C -m 0700 -d .vim_cache
+    install -C -m 0700 -d ${PREFIX}/.vim/bundle
+    install -C -m 0700 -d ${PREFIX}/.vim_cache
     install -C -m 0600 vim/vimrc ${PREFIX}/.vimrc
     echo "Done."
-    if [ ! -d ${VIM_PLUGIN_MANAGER_INSTALL_PATH} ]; then
+    if [[ ! -d ${VIM_PLUGIN_MANAGER_INSTALL_PATH} ]]; then
       echo "Cloning vim plugin manager"
-      git clone ${VIM_PLUGIN_MANAGER_URL} $(VIM_PLUGIN_MANAGER_INSTALL_PATH)
+      git clone "${VIM_PLUGIN_MANAGER_URL}" "${VIM_PLUGIN_MANAGER_INSTALL_PATH}"
       echo "Done."
     fi
-  else
-    echo "Please install git to clone vim plugins."
   fi
 }
 
