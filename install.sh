@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+OS=$(uname)
 PREFIX=${HOME}
 VIM_PLUGIN_MANAGER_URL="https://github.com/Shougo/neobundle.vim"
 VIM_PLUGIN_MANAGER_INSTALL_PATH="~/.vim/bundle/neobundle.vim"
@@ -27,6 +28,12 @@ function install_conky {
   install -C -m 0600 conky/conky_functions.lua ${PREFIX}/.conky_functions.lua
   install -C -m 0600 conky/conkyrc ${PREFIX}/.conkyrc
   echo "Done."
+}
+
+function install_freebsd {
+  echo "Installing FreeBSD specific configuration.."
+  install -C -m 0600 freebsd/login_conf ${PREFIX}/.login_conf
+  echo "done."
 }
 
 function install_git {
@@ -92,6 +99,9 @@ function install_all {
   install_tmux
   install_vim
   install_xorg
+  if [[ "${OS}" = "FreeBSD" ]]; then
+    install_freebsd
+  fi
 }
 
 if [[ -n "$1" ]]; then
