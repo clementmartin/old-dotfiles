@@ -50,6 +50,8 @@ NeoBundle 'tpope/vim-commentary'
 NeoBundle 'edkolev/tmuxline.vim'
 " Dispatch build into another window
 NeoBundle 'tpope/vim-dispatch'
+" Edit crypted files
+NeoBundle 'jamessan/vim-gnupg'
 
 " All of Plugins must be added before the following line
 call neobundle#end()
@@ -98,3 +100,5 @@ nnoremap <leader>b :<C-u>Unite -buffer-name=buffer -start-insert buffer<cr>
 nnoremap <leader>h :<C-u>Unite -buffer-name=help   -start-insert help<cr>
 " file explorer mode
 nnoremap <Leader>e :Explore<CR>
+
+let g:GPGUseAgent = 0
