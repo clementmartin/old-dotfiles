@@ -1,4 +1,4 @@
-source "gpg -dq ~/.mutt/passwords.gpg |"
+source "gpg2 -dq ~/.mutt/passwords.gpg |"
 source ~/.mutt/jellybeans.theme
 source ~/.mutt/gpg.rc
 
