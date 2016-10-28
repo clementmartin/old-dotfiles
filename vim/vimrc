@@ -82,7 +82,7 @@ set laststatus=2
 set modeline
 
 " display tabs and trailing spaces
-set list listchars=tab:»·,trail:·
+set list listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\ 
 
 " set backup / swap dir
 set backupdir=~/.vim_cache//

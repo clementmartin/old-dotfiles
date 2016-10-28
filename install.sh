@@ -1,6 +1,14 @@
-PREFIX=${HOME}
+#!/usr/bin/env bash
+
+OS="$(uname)"
+PREFIX="${HOME}"
 VIM_PLUGIN_MANAGER_URL="https://github.com/Shougo/neobundle.vim"
-VIM_PLUGIN_INSTALL_PATH="~/.vim/bundle/neobundle.vim"
+VIM_PLUGIN_MANAGER_INSTALL_PATH="${PREFIX}/.vim/bundle/neobundle.vim"
+if [[ "${OS}" = "Linux" ]]; then
+  MAKE="make"
+else
+  MAKE="gmake"
+fi
 
 function usage {
   echo "$(basename $0) all"
@@ -25,6 +33,12 @@ function install_conky {
   install -C -m 0600 conky/conky_functions.lua ${PREFIX}/.conky_functions.lua
   install -C -m 0600 conky/conkyrc ${PREFIX}/.conkyrc
   echo "Done."
+}
+
+function install_freebsd {
+  echo "Installing FreeBSD specific configuration.."
+  install -C -m 0600 freebsd/login_conf ${PREFIX}/.login_conf
+  echo "done."
 }
 
 function install_git {
@@ -57,14 +71,21 @@ function install_tmux {
 }
 
 function install_vim {
-  echo "Installing vim configuration..."
-  install -C -D -d -m 0700 .vim/bundle
-  install -C -m 0600 vim/vimrc ${PREFIX}/.vimrc
-  echo "Done."
-  if [ ! -d ${VIM_PLUGIN_MANAGER_INSTALL_PATH} ]; then
-    echo "Cloning vim plugin manager" 
-    git clone ${VIM_PLUGIN_MANAGER_URL} $(VIM_PLUGIN_MANAGER_INSTALL_PATH)
+  if ! which git > /dev/null; then
+    echo "Please install git to clone vim plugins."
+  elif ! which "${MAKE}" > /dev/null; then
+    echo "Please install ${MAKE} to build vimproc plugin."
+  else
+    echo "Installing vim configuration..."
+    install -C -m 0700 -d ${PREFIX}/.vim/bundle
+    install -C -m 0700 -d ${PREFIX}/.vim_cache
+    install -C -m 0600 vim/vimrc ${PREFIX}/.vimrc
     echo "Done."
+    if [[ ! -d ${VIM_PLUGIN_MANAGER_INSTALL_PATH} ]]; then
+      echo "Cloning vim plugin manager"
+      git clone "${VIM_PLUGIN_MANAGER_URL}" "${VIM_PLUGIN_MANAGER_INSTALL_PATH}"
+      echo "Done."
+    fi
   fi
 }
 
@@ -85,6 +106,9 @@ function install_all {
   install_tmux
   install_vim
   install_xorg
+  if [[ "${OS}" = "FreeBSD" ]]; then
+    install_freebsd
+  fi
 }
 
 if [[ -n "$1" ]]; then
