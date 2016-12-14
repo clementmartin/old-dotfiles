@@ -47,6 +47,8 @@ set pager_index_lines     = 15
 set pager_context         = 5
 set sort                  = threads
 set sort_aux              = last-date-received
+unset collapse_unread
+set strict_threads        = yes
 set date_format           = "%y-%m-%d %T"
 set index_format          = "%2C | %Z [%d] %-30.30F (%-4.4c) %s"
 set query_command         = "abook --mutt-query '%s'"
@@ -65,9 +67,11 @@ auto_view                   text/html
 alternative_order           text/plain text/html
 
 bind editor                 <Tab> complete-query
+bind index                  -     collapse-thread
+bind index                  _     collapse-all
 
-macro index,pager           a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
-macro attach                V "<pipe-entry>cat >~/.cache/mutt/mail.html && dwb ~/.cache/mutt/mail.html && rm ~/.cache/mutt/mail.html<enter>"
+macro index,pager           a     "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
+macro attach                V     "<pipe-entry>cat >~/.cache/mutt/mail.html && dwb ~/.cache/mutt/mail.html && rm ~/.cache/mutt/mail.html<enter>"
 
 folder-hook   Sent '\
   set index_format="%2C | %Z [%d] %-30.30t (%-4.4c) %s"'
