@@ -23,6 +23,21 @@
 *color7:  #cccccc
 *color15: #ffffff
 
+! Urxvt config
+! for this to work, you need the rxvt-unicode-256color-ml package on Fedora
+URxvt*background: rgb:08/08/08
+URxvt*foreground: rgb:b2/b2/b2
+URxvt*fading: 20
+URxvt*font: xft:Terminess Powerline:size=10
+URxvt*loginShell: true
+URxvt.boldFont: xft:Terminess Powerline:style=Bold:size=10
+URxvt.letterSpace: true
+URxvt*visualBell: true
+URxvt*scrollBar: false
+URxvt*saveLines: 9999
+URxvt*transparent: true
+URxvt*shading: 20
+URxvt*blurRadius: 3
 
 ! XTerm config
 XTerm*utf8: 1
