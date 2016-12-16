@@ -82,7 +82,7 @@ xcalc*Cursor:                 hand2
 xcalc*ShapeStyle:             rectangle
 
 ! xautolock
-Xautolock.time: 5
+Xautolock.time: 10
 Xautolock.locker: /usr/local/bin/slock
 Xautolock.killtime: 30
 Xautolock.killer: sudo systemctl suspend
